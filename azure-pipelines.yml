@@ -16,6 +16,9 @@ stages:
       inputs:
         terraformVersion: 'latest'
 
+  - job: 
+    displayName: terraformInit
+    steps:
     - task: TerraformTask@5
       displayName: terraformInit
       inputs:
