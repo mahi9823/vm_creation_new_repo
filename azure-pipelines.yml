@@ -9,7 +9,7 @@ stages:
   displayName: terraformBuild
   jobs:
   - job: 
-    displayName: terraformInstall
+    displayName: terraform Install
     pool: mahesh_pool
     steps:
     - task: TerraformInstaller@1
@@ -20,7 +20,7 @@ stages:
     displayName: terraformInit
     steps:
     - task: TerraformTask@5
-      displayName: terraformInit
+      displayName: terraform Init
       inputs:
         provider: 'azurerm'
         command: 'init'
