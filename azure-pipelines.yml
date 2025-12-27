@@ -17,7 +17,7 @@ stages:
         terraformVersion: 'latest'
 
   - job: 
-    displayName: terraformInit
+    displayName: terraform Init
     steps:
     - task: TerraformTask@5
       displayName: terraform Init
@@ -29,4 +29,14 @@ stages:
         backendAzureRmStorageAccountName: 'stg23'
         backendAzureRmContainerName: 'cont23'
         backendAzureRmKey: 'devtfstate'
+
+  - job: 
+    displayName: terraform Plan
+    steps:
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+        environmentServiceNameAzureRM: 'new_infra'
 
