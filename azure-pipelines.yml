@@ -1,0 +1,31 @@
+trigger:
+- feature
+- main 
+
+pool: mahesh_pool
+
+stages:
+- stage: terraformBuild
+  jobs:
+  - job: TerraformBuild
+    steps:
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: 'latest'
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+        backendServiceArm: 'new_infra'
+        backendAzureRmStorageAccountName: 'stg23'
+        backendAzureRmContainerName: 'cont23'
+        backendAzureRmKey: 'devtfstate'
+
+    - task: TerraformTask@5
+      inputs:
+        provider: 'azurerm'
+        command: 'plan'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+        environmentServiceNameAzureRM: 'new_infra'
+
