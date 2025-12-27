@@ -1,6 +1,8 @@
 trigger:
-- feature
-- main 
+ branches:
+   include:
+     - feature
+     - main 
 
 pool: mahesh_pool
 
@@ -28,4 +30,27 @@ stages:
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
         environmentServiceNameAzureRM: 'new_infra'
-
+  
+- stage: TerraformScan
+  jobs:
+    - job: 
+      displayName: TFSec
+      steps:
+    
+      - task: tfsec@1
+        continueOnError: True
+        inputs:
+          version: 'v1.26.0'
+          dir: '''$(System.DefaultWorkingDirectory)/dev'''
+  
+    - job: TFlint
+      displayName: TFLint
+      steps:
+        - script: 
+            curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_windows.ps1 | powershell
+            tflint --version
+            cd $(System.DefaultWorkingDirectory)/dev
+            tflint --init
+            tflint
+      
+      
