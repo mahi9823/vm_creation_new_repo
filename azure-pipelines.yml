@@ -9,18 +9,15 @@ stages:
   displayName: terraformBuild
   jobs:
   - job: 
-    displayName: terraform Install
-    pool: mahesh_pool
+   
+    
     steps:
     - task: TerraformInstaller@1
       inputs:
         terraformVersion: 'latest'
 
-  - job: 
-    displayName: terraform Init
-    steps:
     - task: TerraformTask@5
-      displayName: terraform Init
+      
       inputs:
         provider: 'azurerm'
         command: 'init'
@@ -29,20 +26,6 @@ stages:
         backendAzureRmStorageAccountName: 'stg23'
         backendAzureRmContainerName: 'cont23'
         backendAzureRmKey: 'devtfstate'
-
-  - job: 
-    displayName: terraform Plan
-    steps:
-    - task: TerraformTask@5
-      inputs:
-        provider: 'azurerm'
-        command: 'init'
-        workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
-        backendServiceArm: 'new_infra'
-        backendAzureRmStorageAccountName: 'stg23'
-        backendAzureRmContainerName: 'cont23'
-        backendAzureRmKey: 'devtfstate'
-
 
     - task: TerraformTask@5
       inputs:
