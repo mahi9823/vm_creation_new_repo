@@ -1,0 +1,19 @@
+trigger:
+- feature
+- main 
+
+pool: mahesh_pool
+
+stages:
+- stage: 
+  displayName: terraformBuild
+  jobs:
+  - job: 
+    displayName: terraformInstall
+    pool: mahesh_pool
+    steps:
+    - task: TerraformInstaller@1
+      inputs:
+        terraformVersion: 'latest'
+
+
