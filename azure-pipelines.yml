@@ -1,6 +1,8 @@
 trigger:
-- feature
-- main 
+ branches:
+   include:
+     - feature
+     - main 
 
 pool: mahesh_pool
 
