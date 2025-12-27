@@ -5,19 +5,14 @@ trigger:
 pool: mahesh_pool
 
 stages:
-- stage: 
-  displayName: terraformBuild
+- stage: terraformBuild
   jobs:
-  - job: 
-   
-    
+  - job: TerraformBuild
     steps:
     - task: TerraformInstaller@1
       inputs:
         terraformVersion: 'latest'
-
     - task: TerraformTask@5
-      
       inputs:
         provider: 'azurerm'
         command: 'init'
