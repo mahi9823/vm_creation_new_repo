@@ -55,6 +55,8 @@ stages:
       
 - stage: ManualValidation
   displayName: ManualValidation
+  dependsOn: TerraformScan
+  condition: always()
   pool: Server
   jobs:
     - job: ManualValidation
@@ -63,4 +65,4 @@ stages:
         inputs:
           notifyUsers: 'mhosing24@outlook.com'
           approvers: 'mhosing24@outlook.com'
-
+          instructions: 'Please review Terraform scan results and approve.'
