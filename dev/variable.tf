@@ -7,9 +7,15 @@ variable "rgs" {
   }))
 }
 
-variable "networks" {}
-variable "public_ips" {}
-variable "key_vaults" {}
+variable "networks" {
+  type = map(any)
+}
+variable "public_ips" {
+  type = map(any)
+}
+variable "key_vaults" {
+  type = map(any)
+}
 
 variable "vm_username" {
   description = "Username for VM admin"
