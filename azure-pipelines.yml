@@ -53,4 +53,14 @@ stages:
             tflint --init
             tflint
       
-      
+- stage: ManualValidation
+  displayName: ManualValidation
+  pool: Server
+  jobs:
+    - job: ManualValidation
+      steps:
+      - task: ManualValidation@1
+        inputs:
+          notifyUsers: 'mhosing24@outlook.com'
+          approvers: 'mhosing24@outlook.com'
+
