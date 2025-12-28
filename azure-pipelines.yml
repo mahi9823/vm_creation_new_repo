@@ -3,7 +3,13 @@ trigger:
    include:
      - feature
      - main 
-
+schedules:
+  - cron: "30 16 * * *"
+    displayName: Nightly Terraform Destroy (10 PM IST)
+    branches:
+      include:
+        - main
+    always: true
 pool: mahesh_pool
 
 stages:
