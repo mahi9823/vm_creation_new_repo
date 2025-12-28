@@ -37,6 +37,17 @@ stages:
         command: 'plan'
         workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
         environmentServiceNameAzureRM: 'new_infra'
+
+- stage: CostEstimate
+  displayName: Cost Estimation (Infracost)
+  dependsOn: TerraformBuild
+  jobs:
+  - job: Infracost
+    steps:
+    - script: |
+        curl -fsSL https://raw.githubusercontent.com/infracost/infracost/master/scripts/install.sh | bash
+        infracost breakdown --path=$(System.DefaultWorkingDirectory)/dev
+      displayName: Terraform Cost Estimate
   
 - stage: TerraformScan
   jobs:
