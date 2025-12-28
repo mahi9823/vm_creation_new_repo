@@ -66,3 +66,18 @@ stages:
           notifyUsers: 'mhosing24@outlook.com'
           approvers: 'mhosing24@outlook.com'
           instructions: 'Please review Terraform scan results and approve.'
+
+- stage: Terraform_Build
+  displayName: terraformApply
+  dependsOn: ManualValidation
+  pool: mahesh_pool
+  jobs:
+    - job: 
+      steps:
+      - task: TerraformTask@5
+        inputs:
+          provider: 'azurerm'
+          command: 'apply'
+          workingDirectory: '$(System.DefaultWorkingDirectory)/dev'
+          environmentServiceNameAzureRM: 'new_infra'
+           
