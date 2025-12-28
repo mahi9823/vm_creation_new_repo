@@ -33,7 +33,7 @@ stages:
   
 - stage: TerraformScan
   jobs:
-    - job: TFSec 
+    - job: TFSec
       displayName: TFSec
       steps:
     
