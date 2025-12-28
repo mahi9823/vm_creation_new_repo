@@ -39,8 +39,8 @@ stages:
         environmentServiceNameAzureRM: 'new_infra'
 
 - stage: CostEstimate
-  pool: 
-   vmImage: ubuntu-latest
+  pool: mahesh_pool
+   
   displayName: Cost Estimation (Infracost)
   dependsOn: TerraformBuild
   jobs:
