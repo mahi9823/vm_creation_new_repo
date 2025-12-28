@@ -46,7 +46,7 @@ stages:
     - job: TFlint
       displayName: TFLint
       steps:
-        - script: 
+        - script: |
             curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_windows.ps1 | powershell
             tflint --version
             cd $(System.DefaultWorkingDirectory)/dev
