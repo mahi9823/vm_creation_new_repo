@@ -10,6 +10,12 @@ schedules:
       include:
         - main
     always: false
+
+parameters:
+  - name: run_apply
+    displayName: "Approve terraform Apply"
+    type: boolean
+    default: false    
     
 pool: mahesh_pool
 
@@ -90,7 +96,8 @@ stages:
 - stage: Terraform_Build
   displayName: terraformApply
   dependsOn: ManualValidation
-  condition: always()
+  condition: and(succeeded(), eq('${{ parameters.run_apply }}', true))
+  
   pool: mahesh_pool
   jobs:
     - job: 
