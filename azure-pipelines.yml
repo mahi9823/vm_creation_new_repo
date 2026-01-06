@@ -11,7 +11,7 @@ schedules:
         - main
     always: true
     
-pool: mahesh_pool
+pool: new_start
 
 stages:
 - stage: terraformBuild
@@ -89,7 +89,7 @@ stages:
   displayName: terraformApply
   dependsOn: ManualValidation
   condition: always()
-  pool: mahesh_pool
+  pool: new_start
   jobs:
     - job: 
       steps:
